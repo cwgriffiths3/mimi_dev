@@ -10,7 +10,7 @@ Pkg.add("Mimi")
 # Pkg.update();
 Pkg.update("Mimi")
 
-# Use Mimi
+# Use Mimi to load dependancies etc.
 using Mimi
 
 # Connect to MimiRegistry in pkg REPL (type "]" in the Julia REPL), only need to do this once on a computer
