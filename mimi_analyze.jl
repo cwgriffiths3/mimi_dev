@@ -2,13 +2,13 @@
 #############################  INSTALL
 ######################################
 
-# Add Mimi
-import Pkg;
-Pkg.add("Mimi")
+# # Add Mimi
+# import Pkg;
+# Pkg.add("Mimi")
 
 # Update mimi
 # Pkg.update();
-Pkg.update("Mimi")
+# Pkg.update("Mimi")
 
 # Use Mimi to load dependancies etc.
 using Mimi
@@ -21,7 +21,7 @@ using Mimi
 ######################################
 
 # Add DICE
-Pkg.add("MimiDICE2010")
+# Pkg.add("MimiDICE2010")
 # Pkg.add("MimiDICE2016")
 
 using MimiDICE2010
@@ -48,7 +48,7 @@ fund = MimiFUND.get_model()
 run(fund)
 
 # EXPLORE
-fund[:socioeconomic, :income]
+fun = fund[:socioeconomic, :income]
 explore(fund, title = "My Window")
 
 ## END OF SCRIPT. Have a great day!
