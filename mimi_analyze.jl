@@ -26,6 +26,10 @@ using Mimi
 
 using MimiDICE2010
 dice10 = MimiDICE2010.get_model()
+scc = MimiDICE2010.compute_scc(year = 2025)
+
+# using MimiDICE2016
+# dice16 = MimiDICE2016.get_model()
 
 # RUN
 run(dice10)
