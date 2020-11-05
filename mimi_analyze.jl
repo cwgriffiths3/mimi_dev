@@ -1,5 +1,5 @@
 ######################################
-#############################  INSTALL
+########################  INSTALL MIMI
 ######################################
 
 # # Add Mimi
@@ -36,13 +36,14 @@ run(dice10)
 explore(dice10, title = "Dice 2010")
 
 # Social Cost of Co2
-dice10_scc2015 = MimiDICE2010.compute_scc(year = 2015)
+# MimiDICE2010.update_param!(dice10, :time, 2000:10:2500,update_timesteps=true)
+dice10_scc2025 = MimiDICE2010.compute_scc(year = 2025)
 
 ######################################
 ###########################  DICE 2016
 ######################################
 
-# Add DICE (not yet in MimiRegistry)
+# Add DICE 2016 (not yet in MimiRegistry)
 Pkg.add(url="https://github.com/AlexandrePavlov/MimiDICE2016.jl")
 
 # Use
@@ -58,7 +59,7 @@ run(dice16)
 explore(dice16, title = "Dice 2016")
 
 # Social Cost of Co2
-dice16_scc2015 = MimiDICE2016.compute_scc(year = 2015)
+dice16_scc2025 = MimiDICE2016.compute_scc(year = 2025)
 
 ######################################
 ################################  FUND
@@ -67,18 +68,42 @@ dice16_scc2015 = MimiDICE2016.compute_scc(year = 2015)
 # Add FUND
 Pkg.add("MimiFUND")
 
-# Use FUND
+# Use
 using MimiFUND
+
+# Definitions
 fund = MimiFUND.get_model()
 
-# RUN
+# Run
 run(fund)
 
 # EXPLORE
-fun = fund[:socioeconomic, :income]
-explore(fund, title = "My Window")
+explore(fund, title = "FUND")
 
+# Social Cost of Co2
+fund_scc2025 = MimiFUND.compute_scc(year = 2025)
 
+######################################
+################################  PAGE
+######################################
+
+# Add FUND
+Pkg.add("MimiPAGE2009")
+
+# Use
+using MimiPAGE2009
+
+# Definitions
+page09 = MimiPAGE2009.get_model()
+
+# Run
+run(page09)
+
+# EXPLORE
+explore(page09, title = "PAGE 2009")
+
+# Social Cost of Co2
+page09_scc2020 = MimiPAGE2009.compute_scc(year = 2020)
 
 
 ## END OF SCRIPT. Have a great day!
