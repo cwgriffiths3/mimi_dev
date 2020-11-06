@@ -1,4 +1,10 @@
 ######################################
+############################  PREAMBLE
+######################################
+
+using Pkg
+
+######################################
 ########################  INSTALL MIMI
 ######################################
 
@@ -13,7 +19,7 @@ Pkg.update("Mimi")
 # Use Mimi to load dependancies etc.
 using Mimi
 
-# Connect to MimiRegistry in pkg REPL (type "]" in the Julia REPL), only need to do this once on a computer
+# Connect to MimiRegistry in >pkg REPL (type "]" in the Julia REPL), only need to do this once on a computer
 # registry add https://github.com/mimiframework/MimiRegistry.git
 
 ######################################
@@ -30,9 +36,9 @@ using MimiDICE2010
 dice10 = MimiDICE2010.get_model()
 
 # Update time steps to match FUND and PAGE
-const years = collect(2000:10:2500)
-nyears = length(years)
-set_dimension!(dice10, :time, collect(2000:10:2500))
+
+replace!(dice10, :time, 2000:10:2500)
+update_params!(dice10, :grosseconomy, update_timesteps=true)
 
 # Run
 run(dice10)
@@ -41,7 +47,7 @@ run(dice10)
 explore(dice10, title = "Dice 2010")
 
 # Social Cost of Co2
-dice10_scc2020 = MimiDICE2010.compute_scc(year = 2020)
+dice10_scc2025 = MimiDICE2010.compute_scc(year = 2020)
 
 ######################################
 ###########################  DICE 2016
