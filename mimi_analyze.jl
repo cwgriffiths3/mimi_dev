@@ -29,6 +29,11 @@ using MimiDICE2010
 # Definitions
 dice10 = MimiDICE2010.get_model()
 
+# Update time steps to match FUND and PAGE
+const years = collect(2000:10:2500)
+nyears = length(years)
+set_dimension!(dice10, :time, collect(2000:10:2500))
+
 # Run
 run(dice10)
 
@@ -36,8 +41,7 @@ run(dice10)
 explore(dice10, title = "Dice 2010")
 
 # Social Cost of Co2
-# MimiDICE2010.update_param!(dice10, :time, 2000:10:2500,update_timesteps=true)
-dice10_scc2025 = MimiDICE2010.compute_scc(year = 2025)
+dice10_scc2020 = MimiDICE2010.compute_scc(year = 2020)
 
 ######################################
 ###########################  DICE 2016
