@@ -11,13 +11,16 @@
 using Pkg
 using Mimi
 using Distributions
+using Statistics
 using DataFrames
 using MimiDICE2010
 using MimiDICE2013
 using MimiDICE2016
+using MimiFUND
+using MimiPAGE2009
 
 ######################################
-########################  SCCO2 SERIES
+#######################  SC-CO2 SERIES
 ######################################
 
 ### Loop modified from https://forum.mimiframework.org/t/compute-scc-for-a-modified-mimi-model/84
@@ -43,6 +46,42 @@ for ii in 0:10:50
     push!(scc_dice16, [year_i, scc_i]) #fill SCC dataframe
 end
 
+######################################
+################  SC-CO2 IWG COMPARISON
+######################################
+
+scc_dice10 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+for ii in 0:10:50
+    scc_i = MimiDICE2010.compute_scc(year= 2015 + ii) #compute scc
+    year_i = 2015 + ii
+    push!(scc_dice10, [year_i, scc_i]) #fill SCC dataframe
+end
+
+scc_fund = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+for ii in 0:10:50
+    scc_i = MimiFUND.compute_scc(year= 2015 + ii) #compute scc
+    year_i = 2015 + ii
+    push!(scc_fund, [year_i, scc_i]) #fill SCC dataframe
+end
+
+scc_page = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+scc_2009 = MimiPAGE2009.compute_scc(year= 2009)
+push!(scc_page, [2009,scc_2009])
+for ii in 0:10:40
+    scc_i = MimiPAGE2009.compute_scc(year= 2010 + ii) #compute scc
+    year_i = 2010 + ii
+    push!(scc_page, [year_i, scc_i]) #fill SCC dataframe
+end
+
+### Average SCC
+scc_mean = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+scc_year = scc_dice10[1]
+scc_means = (scc_dice10[2] + scc_fund[2] + scc_page[2])/3
+scc_mean = [scc_dice10[1] scc_means]
+
+######################################
+#########################  UNCERTAINTY
+######################################
 
 ### Example of SCCO2 trials from https://www.mimiframework.org/Mimi.jl/stable/tutorials/tutorial_5/#Advanced-Features-Social-Cost-of-Carbon-(SCC)-Example-1
 
