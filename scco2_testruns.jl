@@ -42,7 +42,7 @@ run(dice10)
 explore(dice10, title = "Dice 2010")
 
 ### Recover Social Cost of Co2 - Time index 2005 to 2595 by 5
-MimiDICE2010.compute_scc(dice10, year = 2025)
+MimiDICE2010.compute_scc(dice10, year = 2015)
 
 
 
