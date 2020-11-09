@@ -4,12 +4,45 @@
 
 ### Add
 # Pkg.add("Distributions")
+# Pkg.add("DataFrames")
+# Pkg.add("MimiDICE2013")
 
 ### Using
 using Pkg
 using Mimi
 using Distributions
+using DataFrames
 using MimiDICE2010
+using MimiDICE2013
+using MimiDICE2016
+
+######################################
+########################  SCCO2 SERIES
+######################################
+
+### Loop modified from https://forum.mimiframework.org/t/compute-scc-for-a-modified-mimi-model/84
+
+scc_dice10 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+for ii in 0:10:50
+    scc_i = MimiDICE2010.compute_scc(year= 2015 + ii) #compute scc
+    year_i = 2015 + ii
+    push!(scc_dice10, [year_i, scc_i]) #fill SCC dataframe
+end
+
+scc_dice13 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+for ii in 0:10:50
+    scc_i = MimiDICE2013.compute_scc(year= 2015 + ii) #compute scc
+    year_i = 2015 + ii
+    push!(scc_dice13, [year_i, scc_i]) #fill SCC dataframe
+end
+
+scc_dice16 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
+for ii in 0:10:50
+    scc_i = MimiDICE2016.compute_scc(year= 2015 + ii) #compute scc
+    year_i = 2015 + ii
+    push!(scc_dice16, [year_i, scc_i]) #fill SCC dataframe
+end
+
 
 ### Example of SCCO2 trials from https://www.mimiframework.org/Mimi.jl/stable/tutorials/tutorial_5/#Advanced-Features-Social-Cost-of-Carbon-(SCC)-Example-1
 
@@ -55,7 +88,7 @@ mm = MimiDICE2010.get_marginal_model(year = scc_year)   # The additional emissio
 si = run(sd, mm, N; trials_output_filename = "scco2_testruns.csv", post_trial_func = my_scc_calculation)
 
 # View the scc_results by retrieving them from the payload object
-scc_results = Mimi.payload(si)   # Recall that the SCC array was the second of two arrays we stored in the payload tuple
+scc_results = Mimi.payload(si)[2]   # Recall that the SCC array was the second of two arrays we stored in the payload tuple
 
 
 ## END OF SCRIPT. Have a great day!
