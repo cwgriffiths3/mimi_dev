@@ -26,7 +26,7 @@ using MimiPAGE2009
 ### Loop modified from https://forum.mimiframework.org/t/compute-scc-for-a-modified-mimi-model/84
 
 scc_dice10 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe
-for ii in 0:10:50
+for ii in 0:10:150
     scc_i = MimiDICE2010.compute_scc(year= 2015 + ii) #compute scc
     year_i = 2015 + ii
     push!(scc_dice10, [year_i, scc_i]) #fill SCC dataframe
@@ -47,7 +47,7 @@ for ii in 0:10:50
 end
 
 ######################################
-################  SC-CO2 IWG COMPARISON
+###############  SC-CO2 IWG COMPARISON
 ######################################
 
 scc_dice10 = DataFrame(time = Int64[], scc = Float64[]) #empty dataframe

@@ -54,7 +54,7 @@ MimiDICE2010.compute_scc(dice10, year = 2025)
 #
 # ### Update time steps to match FUND and PAGE
 # set_dimension!(dice10_t, :time, 2005:5:2300)
-# params = MimiDICE2010.dice2010_excel_parameters()
+params = MimiDICE2010.dice2010_excel_parameters()
 # update_params!(dice10_t, params, update_timesteps = true)
 #
 # ### Run
